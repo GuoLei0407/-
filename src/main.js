@@ -2,6 +2,9 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import './styles/base.css'
+import 'normalize.css'
+import 'amfe-flexible'
 
 Vue.config.productionTip = false
 
