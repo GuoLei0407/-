@@ -7,13 +7,14 @@
       <van-field v-model="user.mobile" label="手机号" placeholder="请输入手机号" :rules="rules.mobile" />
       <van-field v-model="user.code" label="验证码" placeholder="请输入验证码" :rules="rules.code" />
       <div style="margin: 16px">
-        <van-button round block type="info" native-type="submit">提交</van-button>
+        <van-button round block type="info" native-type="submit" :loading="loading">提交</van-button>
       </div>
     </van-form>
   </div>
 </template>
 
 <script>
+import { loginAPI } from '@/api/index.js'
 export default {
   data() {
     return {
@@ -21,6 +22,7 @@ export default {
         mobile: '',
         code: ''
       },
+      loading: false,
       // 规则对象
       rules: {
         // 手机号的规则
@@ -38,7 +40,43 @@ export default {
     }
   },
   methods: {
-    onSubmit() {}
+    // 表单提交触发的事件，一定要等表单验证通过才会调用
+    async onSubmit() {
+      // 将loading改为true，使button按钮变为加载状态
+      // console.log(this.user)
+      this.loading = true
+      // 当这个函数被调用,就意味着用户输入的内容符合规则
+      // 那我们就可以发请求做登录了
+      // 本接口的处理是:如果登录成功,就会正常响应
+      // 如果登录失败则直接给你请求报错,所以要用catch
+      // 当catch被触发就代表账号或密码有问题
+      // loginAPI(this.user)
+      //   .then((res) => {
+      //     console.log(res)
+      //     // 在vant中导入toast方法，并挂载到vue实例上，这是vant提供的一个提示组件
+      //     this.$toast.success('登录成功！！！')
+      //   })
+      //   .catch((error) => {
+      //     // 登录失败
+      //     this.$toast.fail('登录失败!')
+      //     console.log(error)
+      //   })
+      //   .finally(() => {
+      //     // 这个方法会在loginAPI方法结束后触发（不管是成功或者不成功）
+      //     // 将loading改为false以便下次使用
+      //     this.loading = false
+      //   })
+      try {
+        const res = await loginAPI(this.user)
+        this.$toast.success('登录成功')
+        console.log(res)
+      } catch {
+        // 响应失败。密码账号有问题
+        this.$toast.fail('登录失败')
+      } finally {
+        this.loading = false
+      }
+    }
   }
 }
 </script>
