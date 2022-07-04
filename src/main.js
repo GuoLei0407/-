@@ -5,7 +5,7 @@ import store from './store'
 import './styles/base.css'
 import 'normalize.css'
 import 'amfe-flexible'
-
+import './untils/vant.js'
 Vue.config.productionTip = false
 
 new Vue({

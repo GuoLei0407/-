@@ -1,0 +1,50 @@
+import {
+  Button,
+  NavBar,
+  Field,
+  Form,
+  Toast,
+  Tabbar,
+  TabbarItem,
+  Icon,
+  Cell,
+  CellGroup,
+  Popup,
+  DatetimePicker,
+  Dialog,
+  Tabs,
+  Tab,
+  Uploader,
+  List,
+  PullRefresh,
+  Divider,
+  ActionSheet,
+  GridItem,
+  Grid,
+  Search
+} from 'vant'
+import Vue from 'vue'
+Vue.use(ActionSheet)
+Vue.use(GridItem)
+Vue.use(Grid)
+Vue.use(Search)
+
+Vue.use(List)
+Vue.use(PullRefresh)
+Vue.use(Tab)
+Vue.use(Tabs)
+Vue.use(Tabbar)
+Vue.use(TabbarItem)
+Vue.use(Button)
+Vue.use(NavBar)
+Vue.use(Form)
+Vue.use(Field)
+Vue.use(Toast)
+Vue.use(Icon)
+Vue.use(Cell)
+Vue.use(CellGroup)
+Vue.use(Popup)
+Vue.use(DatetimePicker)
+Vue.use(Dialog)
+Vue.use(Uploader)
+Vue.use(Divider)

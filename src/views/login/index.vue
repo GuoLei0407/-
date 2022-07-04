@@ -1,0 +1,46 @@
+<template>
+  <div>
+    <van-nav-bar title="登录" />
+    <!-- 表单部分 -->
+    <!-- @submit提交事件: 当提交表单时触发 -->
+    <van-form @submit="onSubmit">
+      <van-field v-model="user.mobile" label="手机号" placeholder="请输入手机号" :rules="rules.mobile" />
+      <van-field v-model="user.code" label="验证码" placeholder="请输入验证码" :rules="rules.code" />
+      <div style="margin: 16px">
+        <van-button round block type="info" native-type="submit">提交</van-button>
+      </div>
+    </van-form>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      user: {
+        mobile: '',
+        code: ''
+      },
+      // 规则对象
+      rules: {
+        // 手机号的规则
+        mobile: [
+          // 必填规则
+          { required: true, message: '请填写手机号' },
+          // 验证手机号规则
+          { pattern: /^1[2-9]\d{9}$/, message: '请输入正确的手机号' }
+        ],
+        code: [
+          { required: true, message: '请填写验证码' },
+          { pattern: /^\d{6}$/, message: '请输入6位数字验证码' }
+        ]
+      }
+    }
+  },
+  methods: {
+    onSubmit() {}
+  }
+}
+</script>
+
+<style></style>

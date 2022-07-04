@@ -3,3 +3,9 @@
   margin: 0;
   padding: 0;
 }
+.van-nav-bar {
+  background-color: #3196fa !important;
+}
+.van-nav-bar .van-nav-bar__title {
+  color: #fff;
+}
