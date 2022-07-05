@@ -19,8 +19,8 @@ export default {
   data() {
     return {
       user: {
-        mobile: '',
-        code: ''
+        mobile: '13797224987',
+        code: '246810'
       },
       loading: false,
       // 规则对象
@@ -69,6 +69,8 @@ export default {
       try {
         const res = await loginAPI(this.user)
         this.$toast.success('登录成功')
+        //
+        this.$store.commit('setToken', res.data.data)
         console.log(res)
       } catch {
         // 响应失败。密码账号有问题
