@@ -12,9 +12,11 @@ const routes = [
     component: () => import('../layout/index.vue'),
     children: [
       { path: 'home', component: () => import('../views/home/index.vue') },
-      { path: 'ask', component: () => import('../views/home/index.vue') },
-      { path: 'video', component: () => import('../views/home/index.vue') },
-      { path: 'mine', component: () => import('../views/home/index.vue') }
+      { path: 'ask', component: () => import('../views/ask/index.vue') },
+      { path: 'video', component: () => import('../views/video/index.vue') },
+      { path: 'mine', component: () => import('../views/mine/index.vue') },
+      // 这里的路径是为了让用户看起来知道这是我的资料的修改
+      { path: 'edit', component: () => import('../views/mine/edit.vue') }
     ]
   }
 ]

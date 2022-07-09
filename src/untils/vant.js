@@ -21,14 +21,15 @@ import {
   ActionSheet,
   GridItem,
   Grid,
-  Search
+  Search,
+  Image as VanImage
 } from 'vant'
 import Vue from 'vue'
 Vue.use(ActionSheet)
 Vue.use(GridItem)
 Vue.use(Grid)
 Vue.use(Search)
-
+Vue.use(VanImage)
 Vue.use(List)
 Vue.use(PullRefresh)
 Vue.use(Tab)
