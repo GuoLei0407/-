@@ -14,7 +14,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'vue/multi-word-component-names': ['error', {
-      ignores: ['index', 'edit']
+      ignores: ['index', 'edit', 'home', 'comment', 'reply', 'result']
     }],
     'space-before-function-paren': ['error', 'never']
   }

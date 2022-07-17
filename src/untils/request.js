@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import { Toast } from 'vant'
+import { Toast } from 'vant'
 // 导入store
 import store from '@/store'
 // import router from '@/router'
@@ -27,20 +27,42 @@ request.interceptors.request.use(
     return Promise.reject(error)
   }
 )
-
-// request.interceptors.response.use(function(response) {
-//   console.log('响应拦截了', response)
-//   // 正常响应调用的函数
-//   // response这个参数就是服务器返回的响应数据
-//   // return response;
-
-//   // 我在响应拦截里return什么，那么发请求的.then里拿到的就是什么结果
-//   return 'abc'
-// },
-// function(error) {
-//   console.log('响应出错了', error)
-//   return '你好'
-// }
-// )
+// 响应拦截
+request.interceptors.response.use(
+  res => {
+    return res
+  },
+  async error => {
+    console.log('响应拦截error', error)
+    // 接口请求错误统一处理：
+    if (error.response && error.response.data) {
+      // 如果响应状态码为401
+      // 出现这种错误，说明我们有token但是token已经过期了
+      // 会引起的问题： 当我们好久没登陆时，我们点击我的页面但是页面没有出现
+      // 原因：在路由守卫中我们设置了检查如果有token但是没有用户信息，我们就调用vuex中的方法
+      // 重新发起请求用户信息，但是我们的token已经过期了，所以发起请求后
+      if (error.response.status === 401) {
+        try {
+          const res = await axios({
+            url: 'http://toutiao.itheima.net/v1_0/authorizations',
+            method: 'put',
+            headers: {
+              Authorization: 'bearer ' + store.state.tokenObj.refresh_token
+            }
+          })
+          console.log('成功', res)
+          store.commit('setToken', {
+            token: res.data.data.token,
+            refresh_token: store.state.tokenObj.refresh_token
+          })
+          return request(error.config)
+        } catch {
+          Toast.fail(error.response.data.message)
+          store.commit('logout')
+        }
+      }
+    }
+  }
+)
 // 导出对象
 export default request

@@ -7,7 +7,7 @@
       <van-field v-model="user.mobile" label="手机号" placeholder="请输入手机号" :rules="rules.mobile" />
       <van-field v-model="user.code" label="验证码" placeholder="请输入验证码" :rules="rules.code" />
       <div style="margin: 16px">
-        <van-button round block type="info" native-type="submit" :loading="loading">提交</van-button>
+        <van-button round block type="info" native-type="submit" :loading="loading">登录</van-button>
       </div>
     </van-form>
   </div>
@@ -72,6 +72,10 @@ export default {
         //
         this.$store.commit('setToken', res.data.data)
         console.log(res)
+        const back = this.$route.query.back // 这里back就是我们在路由守卫里面 next('/login?back=' + to.fullPath) 携带的参数
+        // 意思是：我们从别的页面来到登录页是会路由会携带一个参数back，back的值就表示我们从哪里来到登录页的
+        // 通过$route.query.back获取到back的值 然后我们点击登录的时候，有back的值我们就直接去back记载的地址，没有就去home
+        this.$router.push(back || '/layout/home')
       } catch {
         // 响应失败。密码账号有问题
         this.$toast.fail('登录失败')
